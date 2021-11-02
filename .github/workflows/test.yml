@@ -10,7 +10,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: |
-          tf_branch=$(echo "${{ github.ref }}" | cut -d "/" -f 3)
+          tf_branch=$(echo "${{ github.ref }}" | cut -d "/" -f 4)
           echo $tf_branch
           if [[ $tf_branch = "test" ]]
           then
