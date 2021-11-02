@@ -15,6 +15,7 @@ jobs:
           then
             echo "tf_workspace=testing" >> $GITHUB_ENV
           elif [[$tf_branch -eq "production"]]
+          then
             echo "tf_workspace=prod" >> $GITHUB_ENV
           else 
             echo "tf_workspace=default" >> $GITHUB_ENV
