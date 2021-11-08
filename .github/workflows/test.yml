@@ -12,9 +12,9 @@ jobs:
       - run: |
           tf_branch=$(echo "${{ github.ref }}" | cut -d "/" -f 4)
           echo $tf_branch
-          if [[ $tf_branch = "test" ]]
+          if [[ $tf_branch = "staging" ]]
           then
-            echo "tf_workspace=testing" >> $GITHUB_ENV
+            echo "tf_workspace=stage" >> $GITHUB_ENV
           elif [[ $tf_branch = "production" ]]
           then
             echo "tf_workspace=prod" >> $GITHUB_ENV
