@@ -9,6 +9,19 @@ jobs:
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v2
+      - run: |
+          tf_branch=$(echo "${{ github.ref }}" | cut -d "/" -f 3)
+          echo $tf_branch
+          if [[ $tf_branch = "staging" ]]
+          then
+            echo "tf_workspace=stage" >> $GITHUB_ENV
+          elif [[ $tf_branch = "production" ]]
+          then
+            echo "tf_workspace=prod" >> $GITHUB_ENV
+          else 
+            echo "tf_workspace=default" >> $GITHUB_ENV
+          fi
+      - run: echo $tf_workspace
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
