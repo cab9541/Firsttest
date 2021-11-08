@@ -13,3 +13,18 @@ jobs:
     steps:
       - name: "set-env"
         run: echo " ${{ github.head_ref }} "
+      - name: "determine tf folder"
+        run: |
+          tf_branch=$(echo "${{ github.head_ref }}" | cut -d "/" -f 1)
+          echo $tf_branch
+          if [[ $tf_branch = "staging" ]]
+          then
+            echo "tf_workspace=stage" >> $GITHUB_ENV
+          elif [[ $tf_branch = "production" ]]
+          then
+            echo "tf_workspace=prod" >> $GITHUB_ENV
+          else 
+            echo "tf_workspace=default" >> $GITHUB_ENV
+          fi
+      - name: "echo workspace"
+        run: echo $tf_workspace
