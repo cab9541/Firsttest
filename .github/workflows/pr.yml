@@ -27,4 +27,7 @@ jobs:
             echo "GH_HEAD_BRANCH=default" >> $GITHUB_ENV
           fi
       - name: "echo workspace"
-        run: echo $GH_HEAD_BRANCH
+        run: | 
+          echo $GH_HEAD_BRANCH
+          cd ./.github
+          ls
